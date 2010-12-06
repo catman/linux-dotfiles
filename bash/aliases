@@ -28,6 +28,8 @@ alias gnp='git-notpushed'
 alias ga='git add'
 alias ginit='git init'
 alias gemflock='git add Gemfile Gemfile.lock'
+alias glist='git ls-files'
+alias grm='git rm'
 
 function gg() {
 	git commit -v -a -m "$*"
