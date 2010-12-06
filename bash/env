@@ -1,0 +1,16 @@
+# Git aliases for bash
+# Put in ~/.bash_profile
+
+export PATH=/usr/local/bin:/opt/local/bin:/opt/local/sbin:/opt/local/lib/mysql5/bin:$PATH
+export PATH=/usr/local/lib/ruby/gems/1.9.1:$PATH
+export PATH=$PATH:~/bin:~/bin/closure
+export PATH=$PATH:/usr/local/bin/growlnotify
+export RAILS_ENV=development
+export EDITOR="mate -w"
+export CLASSPATH=.:./jars:~/jars:$CLASSPATH
+
+# for cheat sheet editor
+export VISUAL='mate -w'
+
+# export GREP_OPTIONS="'--color=always" 
+

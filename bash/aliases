@@ -1,0 +1,172 @@
+# $1, $2, $3
+# $* = all arguments
+# function ccn() {
+# history | awk '{a[$2]++}END{for(i in a){print a[i] " " i}}' | sort -rn | head
+# }
+
+alias topc='top -o cpu'
+alias topm='top -o vsize'
+
+# mongoDB
+alias mongod='./opt/local/lib/mongodb/bin/mongod &'
+alias mongol='./opt/local/lib/mongodb/bin/mongo'
+
+alias expt='export PATH; PATH=$1:$PATH'
+
+# git
+alias gs='git status'
+alias gpull='git pull'
+alias gpush='git push'
+alias gdif='git diff | mate'
+alias gcom='git commit -v'
+alias gca='git commit -v -a'
+alias gbr='git branch'
+alias gbra='git branch -a'
+alias gco='git checkout'
+alias gd='git diff'
+alias gnp='git-notpushed'
+alias ga='git add'
+alias ginit='git init'
+alias gemflock='git add Gemfile Gemfile.lock'
+
+function gg() {
+	git commit -v -a -m "$*"
+}
+
+# paths etc
+alias echopath='echo $PATH'
+alias editpath='mate ~/.profile'
+alias helploadpath='echo "/etc/profile, ~/.bash_profile, ~/.bash_login -if .bash_profile does not exist, ~/.profile -if .bash_login does not exist"'
+alias rlp='ruby -e "puts $:"'
+
+# navigation
+# alias cdvph='cd ~/var/rails/vphthac'
+# alias cdjvp='cd ~/var/rails/jvphthac'
+alias cdpro=" cd ~/projects" 
+alias cdmybun='cd ~/Library/Application\ Support/TextMate/Bundles/'
+alias cdtmbun='cd /Library/Application\ Support/TextMate/Bundles/'
+
+#
+alias bins="bundle install"
+alias bspec='bundle exec rspec $1 -f d'
+alias bauto='bundle exec autotest'
+alias bautof='export AUTOFEATURE=true && bundle exec autotest'
+
+alias rstake='./script/rstakeout "./script/cucumber" "app/**/*.rb" "lib/**/*.rb"  "features/**/*"'
+alias csta='./script/cstake' #' -t wip'
+
+alias rct="rails console test"
+
+# aliases
+alias reload="source ~/bin/dotfiles/bash/aliases"
+alias ea='mate -w ~/bin/dotfiles/bash/aliases && reload'
+alias eenv='mate ~/bin/dotfiles/bash/env'
+alias sas="alias | grep $1 --color=always"
+alias shi="history | grep $1 --color=always"
+alias edhosts='mate /etc/hosts'
+
+# logs
+alias td='tail -f log/development.log'
+alias tt='tail -f log/test.log'
+
+# background jobs
+alias stst='ruby script/starling_status'
+alias wk='ruby script/workling_client '
+
+# terminal
+alias clr='clear'
+alias lst='ls -lah'
+alias lh='ls -al'
+alias lt='ls -lt'
+alias cdd="cd -"
+alias his='history'
+alias ff='ls -alR | grep '
+alias fif="grep -nir $1 ."
+
+# processes
+alias tu='top -o cpu'
+alias tm='top -o vsize'
+alias psf='ps -ax | grep'
+
+# Rails
+alias ss='script/server'
+alias sc='script/console'
+alias sg='script/generate'
+alias sp='script/plugin install'
+alias sgm='script/generate migration'
+alias rmig='rake db:migrate'
+alias rsd='rake db:schema:dump'
+
+# gems
+alias gin="sudo gem install --no-ri --no-rdoc"
+alias gist="gem list"
+alias grdoc="sudo gem rdoc --all --no-overwrite --no-ri"
+alias ghc="gem help commands"
+alias geupd="gem update --system"
+alias gll='gem list -l'
+alias glr='gem list -r'
+alias glrd='gem list -r -d'
+
+# jruby
+alias jgin="jruby -S gem install --no-rdoc --no-ri"
+alias jgist="jruby -S gem list"
+alias jss="jruby -S script/server"
+alias jr="jruby -S"
+alias jsc='jruby -S script/console'
+
+# rvm
+alias rvl="rvm list rubies"
+alias rvu="rvm use"
+alias rvs="rvm $1 --symlink textmate"
+alias rgin="rvm gem install --no-rdoc --no-ri"
+alias rvsys="rvm use system; rvm rbx --symlink textmate"
+alias rgi="sudo rake gems:install"
+alias sro="rake routes | grep "
+alias rvk="rvm list known"
+alias rvru="rvm list rubies"
+
+# watchr
+alias watch='watchr watchr/all.watchr'
+
+# gzip
+alias unzip="tar xzvf" # unzips -x decompress flag -v verbose -f file 
+alias zip="tar czvf" # zips -c create -z gzip compression -v verbose -f file
+alias curlget="curl -O" # outputs to remote file name
+alias cconfig="./configure --prefix=/usr/local"
+alias mmake="make && make install"
+alias sset="env"
+
+function acuc {
+  ./script/rstakeout "./script/cucumber" "app/**/*.rb" "features/**/*"
+}
+
+# RUBY
+# use readline, completion and require rubygems by default for irb
+alias irb='irb --simple-prompt -r irb/completion -rubygems'
+
+# dump to fixtures, uses topfunky/ar_fixtures
+alias tofix='rake db:fixtures:dump RAILS_ENV=development'
+
+
+ 
+# really awesome function, use: cdgem <gem name>, cd's into your gems directory
+# and opens gem that best matches the gem name provided
+function cdgem {
+  cd `gem env gemdir`/gems
+  cd `ls | grep $1 | sort | tail -1`
+}
+function gemdoc {
+  GEMDIR=`gem env gemdir`/doc
+  open $GEMDIR/`ls $GEMDIR | grep $1 | sort | tail -1`/rdoc/index.html
+}
+function mategem {
+  GEMDIR=`gem env gemdir`/gems
+  mate $GEMDIR/`ls $GEMDIR | grep $1 | sort | tail -1`
+ }
+
+#  misc
+
+# mojombo http://gist.github.com/180587
+function pig {
+  ps wwwaux | egrep "( $1 | %CPU )" | grep -v grep
+}
