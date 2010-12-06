@@ -1,6 +1,0 @@
-Host vphthac
-	HostName 208.88.125.198
-	User root
-	Port 22
-	
-# 	ln -s ~/bin/dotfiles/ssh/config ~/.ssh/config
