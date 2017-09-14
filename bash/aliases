@@ -1,19 +1,119 @@
-# $1, $2, $3
-# $* = all arguments
-# function ccn() {
-# history | awk '{a[$2]++}END{for(i in a){print a[i] " " i}}' | sort -rn | head
-# }
+alias sas='cat ~/bin/dotfiles/bash/aliases | grep'
 
-alias topc='top -o cpu'
-alias topm='top -o vsize'
+## scp raspberrypi
+#alias scpi='scp $1 pi@raspberrypi: '  # scp ./hello pi@raspberrypi:
+#alias scpwifi='scp -r . pi@raspberrypi:/home/pi/gowork/src/github.com/wifi-monitor'
+#alias scpw='scp $1 pi@raspberrypi:/home/pi/gowork/src/github.com/wifi-monitor'
 
-# mongoDB
-alias mongod='./opt/local/lib/mongodb/bin/mongod &'
-alias mongol='./opt/local/lib/mongodb/bin/mongo'
+# -gccgoflags 'arg list'
+# arguments to pass on each gccgo compiler/linker invocation.
+# -gcflags 'arg list'
+# arguments to pass on each go tool compile invocation.
+# alias crpi='env CC=/usr/local/linaro/arm-linux-gnueabihf-raspbian/bin/arm-linux-gnueabihf-gcc \
+# 								CXX=/usr/local/linaro/arm-linux-gnueabihf-raspbian/bin/arm-linux-gnueabihf-g++ \
+# 								GOOS=linux GOARCH=arm GOARM=7 CGO_ENABLED=1 go build -v -i -a' # -x,  --ldflags '-extldflags "-static"' CC=clang
+# alias crpm='env CC=/usr/local/linaro/arm-linux-gnueabihf-raspbian/bin/arm-linux-gnueabihf-gcc 
+# 								CXX=/usr/local/linaro/arm-linux-gnueabihf-raspbian/bin/arm-linux-gnueabihf-g++ 
+# 								GOOS=linux GOARCH=arm GOARM=7 CGO_ENABLED=1 go build -v -i -a -x' # -x,  --ldflags '-extldflags "-static"' CC=clang
 
+# alias chkmd5='openssl md5'
+
+alias fdmg='find ~ -name "*.dmg"'
+
+alias rdubu='ssh -L 5901:127.0.0.1:5901 -N -f -l david 192.168.1.71'
+
+#
+# alias sspy='ssh pi@raspberrypi'
+
+## auto color grep
+# alias grep='grep --color=auto'
+alias egrep='egrep --color=auto'
+alias fgrep='fgrep --color=auto'
+
+## update this repository
+alias udali='cd ~/bin && gg "update aliases" && git push && cdd' # update aliases to bitbucket
+alias uplein='cd ~/.lein && gg "update .lein" && git push && cdd' # update .lein to bitbucket
+alias cdlogs='cd /var/log'
+
+alias cdst='cd /Users/david/Library/Application\ Support/Sublime\ Text\ 2/Packages/user'
+alias psst='cdst && git add -A && gg "update st user settings" && git push && cdd' 			# push ST2 user settings to BitBucket
+alias plst='cdst && git pull && cdd' 														# pull ST2 user settings from BitBucket
+
+## https://confluence.atlassian.com/pages/viewpage.action?pageId=270827678
+alias upssh='ps -e  | grep [s]sh-agent'
+alias start_ssh='ssh-agent /bin/bash'
+alias addssh='ssh-add ~/.ssh/$1' # add the ssh key to the ssh-agent list, just use "id_rsa"
+alias listssh='ssh-add -l' # list the managed ssh keys
+
+## open books
+alias opcia='open ~/BOOKS/Clojure_in_Action.pdf'
+
+## http://xquartz.macosforge.org/trac/wiki/X11-UsersFAQ
+
+## http://osxdaily.com/2010/02/17/track-down-all-startup-login-script-and-application-launches-in-mac-os-x/
+# system startup progs
+alias sysstprogs='l /System/Library/LaunchDaemons && l /Library/LaunchDaemons && l /System/Library/LaunchDaemons'
+# user startup progs
+alias usrstprogs='l ~/Library/LaunchAgents && l /Library/LaunchAgents/ && l /System/Library/LaunchAgents/'
+# scheduled jobs
+alias schprogs='crontab -l'
+# kernal extensions
+alias kerext='kextstat'
+
+# rmenv , ruby version management tht works?
+# this is installed with the homebrew option not the ~/.rbenv option
+alias rbedoc='open https://github.com/sstephenson/rbenv' # rbenv, rvm, ruby, version management
+
+alias topc='top -o cpu -n 40'
+alias topm='top -o vsize -n 40'
+alias topj='top -pid `pgrep java | tr "\\n" "," | sed "s/,$//"`'
+
+alias ubrew='brew update >> brew.update.notes.txt & more brew.update.notes.txt'
 alias expt='export PATH; PATH=$1:$PATH'
 
+alias cdlog='cd /var/log'
+alias llog='l /var/log'
+
+alias gradle='echo "with --no-daemon" && ./gradlew --no-daemon' 
+
+# rabbitmq http://www.rabbitmq.com/install-homebrew.html 
+# alias rabbitmq='rabbitmq-server'
+
+# hadoop
+		# In Hadoop's config file:
+		#   /usr/local/Cellar/hadoop/1.2.1/libexec/conf/hadoop-env.sh
+		# $JAVA_HOME has been set to be the output of:
+		#   /usr/libexec/java_home
+alias had_cd='cd /usr/local/Cellar/hadoop/1.2.1/bin'
+alias had_start='/usr/local/Cellar/hadoop/1.2.1/bin/start-all.sh'
+alias had_stop='/usr/local/Cellar/hadoop/1.2.1/bin/stop-all.sh'
+alias had_log='tail -f /usr/local/Cellar/hadoop/1.2.1/libexec/logs/hadoop-david-datanode-rab-macmini.log'
+alias had_format='hadoop namenode -format'
+alias had_test='hadoop jar /usr/local/Cellar/hadoop/1.2.1/libexec/hadoop-examples-1.2.1.jar pi 10 100'
+
+# hbase
+# alias hba_cd='cd /usr/local/Cellar/hbase/0.94.4/libexec'
+# alias hba_start='/usr/local/Cellar/hbase/0.94.4/libexec/bin/start-hbase.sh'
+# alias hba_stop='/usr/local/Cellar/hbase/0.94.4/libexec/bin/stop-hbase.sh'
+# alias hba_log='tail -f /usr/local/Cellar/hbase/0.94.4/libexec/logs/hbase-david-master-rab-macmini.log'
+
+# redis
+		# To have launchd start redis at login:
+		#     ln -sfv /usr/local/opt/redis/*.plist ~/Library/LaunchAgents
+		# Then to load redis now:
+		#     launchctl load ~/Library/LaunchAgents/homebrew.mxcl.redis.plist
+		# Or, if you don't want/need launchctl, you can just run:
+		#     redis-server /usr/local/etc/redis.conf
+alias red_start='redis-server /usr/local/etc/redis.conf'
+# emacs
+alias ema='/Applications/Emacs.app/Contents/MacOS/bin/emacsclient'
+alias em='emacs'
+
 # git
+alias gaa='git add -A .' # git add all
+alias glog='git l' # destroyallsoftware pritty print log -> cat ~/.gitconfig
+alias gpc='cat ~/.gitconfig'
+alias gcl1='git clone --depth 1' # clones just the latest complete version
 alias gs='git status'
 alias gpull='git pull'
 alias gpush='git push'
@@ -30,145 +130,227 @@ alias ginit='git init'
 alias gemflock='git add Gemfile Gemfile.lock'
 alias glist='git ls-files'
 alias grm='git rm'
+alias glog='git log'
+alias gsl='git ls-tree --name-only -r HEAD'
+alias gdl='git diff-tree --name-only -r HEAD'
+alias ggitign='mate ~/.gitignore_global'
+alias greset='git reset --hard origin/master'  # overwrite, reset local changes
+alias ungit="find . -name '.git' -exec rm -rf {} \;"
+function gg() { 
+    git commit -v -a -m "$*" # function gg
+} 	# Commit pending changes and quote all args as message
+## graphical git diff
+# http://git-scm.com/book/en/Customizing-Git-Git-Configuration
+# run like -> git diff 32d1776b1^ 32d1776b1
+# merge conflicts with -> git mergetool
 
-function gg() {
-	git commit -v -a -m "$*"
+function updloc() {
+	  sudo sh /usr/libexec/locate.updatedb
 }
+
+alias pih='ping 192.168.1.254'
+alias pig='ping google.co.uk'
+alias ifc='ifconfig | grep'
+
+function fstartup() {
+	
+	echo "-- in /Library/LaunchDaemons.."
+	ls /Library/LaunchDaemons | grep $1
+	
+	echo "-- in /System/Library/LaunchDaemons .."
+	ls /System/Library/LaunchDaemons | grep $1
+	
+	echo "-- in /Library/LaunchAgents .."
+	ls /Library/LaunchAgents | grep $1
+	
+	echo "-- in /System/Library/LaunchAgents .."
+	ls /System/Library/LaunchAgents | grep $1
+	
+	echo "-- in /Users/david/Library/LaunchAgents .."
+	ls /Users/david/Library/LaunchAgents | grep $1
+}
+
+
 
 # paths etc
 alias echopath='echo $PATH'
-alias editpath='mate ~/.profile'
 alias helploadpath='echo "/etc/profile, ~/.bash_profile, ~/.bash_login -if .bash_profile does not exist, ~/.profile -if .bash_login does not exist"'
-alias rlp='ruby -e "puts $:"'
+
+alias hh='cd ~'
+
+# note taking
+alias pan="echo >> notes.txt; pbpaste >> notes.txt;  cat notes.txt; echo crlf "
+
+# <meta http-equiv="refresh" content="0; url=http://example.com/" />
+function pah() {
+	url2 < pbpaste
+	echo $url2
+}
+
+alias pcc='echo >> commands.txt; history 1'
+alias aan='cat notes.txt; echo crlf'
+alias san='cat notes.txt | grep'
+alias pwc='pwd > pbcopy'
+
+# disk usage
+alias dum='du -mhc'
+alias dums='du . | sort -nr'
+alias dum0='du -d 0 -mhc .'
+alias dum1='du -d 1 -mhc .'
+alias dumb="du -h . | grep '[0-9\.]\+G\t'"
+
+alias ddiff='diff -rq' # diff directories
+alias lflex='l /Volumes/GO-FLEX/' # usb drive
 
 # navigation
-# alias cdvph='cd ~/var/rails/vphthac'
-# alias cdjvp='cd ~/var/rails/jvphthac'
-alias cdpro=" cd ~/projects" 
+alias cdpro="cd ~/projects"
+alias cdclo="cd ~/projects/clojure"
+alias cdcia="cd ~/projects/clojure/clojure-in-action"
+alias cdboo="cd ~/BOOKS"
+alias cdios="cd ~/projects/ios && l"
 alias cdmybun='cd ~/Library/Application\ Support/TextMate/Bundles/'
 alias cdtmbun='cd /Library/Application\ Support/TextMate/Bundles/'
+alias cdst2='cd ~/Library/Application\ Support/Sublime\ Text\ 2/'
+#alias flex='/Volumes/GO-FLEX'
+alias clearslowopenfile='rm ~/Library/Preferences/com.apple.finder.plist && killall -HUP Finder'
 
-#
-alias bins="bundle install"
-alias bspec='bundle exec rspec $1 -f d'
-alias bauto='bundle exec autotest'
-alias bautof='export AUTOFEATURE=true && bundle exec autotest'
+# homebrew
+alias cdcell='cd $(brew --cellar)'
+alias lcell='l $(brew --cellar)'
+alias lformula='ls $(brew --prefix)/Library/Formula'	# list local brew homebrew formulae
+# fix: Your local changes to the following files would be overwritten by merge
+# https://github.com/mxcl/homebrew/issues/11448
+function fix_brew() {
+		cd `brew --prefix`
+		git remote add origin https://github.com/mxcl/homebrew.git
+		git fetch origin
+		git reset --hard origin/master
+}
 
-alias rstake='./script/rstakeout "./script/cucumber" "app/**/*.rb" "lib/**/*.rb"  "features/**/*"'
-alias csta='./script/cstake' #' -t wip'
-
-alias rct="rails console test"
-
-# aliases
-alias reload="source ~/bin/dotfiles/bash/aliases"
-alias ea='mate -w ~/bin/dotfiles/bash/aliases && reload'
-alias eenv='mate ~/bin/dotfiles/bash/env'
-alias sas="alias | grep $1 --color=always"
-alias shi="history | grep $1 --color=always"
-alias edhosts='mate /etc/hosts'
-
-# logs
-alias td='tail -f log/development.log'
-alias tt='tail -f log/test.log'
-
-# background jobs
-alias stst='ruby script/starling_status'
-alias wk='ruby script/workling_client '
-
-# terminal
-alias clr='clear'
-alias lst='ls -lah'
-alias lh='ls -al'
-alias lt='ls -lt'
-alias cdd="cd -"
-alias his='history'
-alias ff='ls -alR | grep '
-alias fif="grep -nir $1 ."
-
-# processes
-alias tu='top -o cpu'
-alias tm='top -o vsize'
-alias psf='ps -ax | grep'
-
-# Rails
-alias ss='script/server'
-alias sc='script/console'
-alias sg='script/generate'
-alias sp='script/plugin install'
-alias sgm='script/generate migration'
-alias rmig='rake db:migrate'
-alias rsd='rake db:schema:dump'
+alias cdmysqld='cd /usr/local/var/mysql/'
 
 # gems
 alias gin="sudo gem install --no-ri --no-rdoc"
 alias gist="gem list"
 alias grdoc="sudo gem rdoc --all --no-overwrite --no-ri"
-alias ghc="gem help commands"
+alias ghcom="gem help commands"
 alias geupd="gem update --system"
 alias gll='gem list -l'
 alias glr='gem list -r'
 alias glrd='gem list -r -d'
-
-# jruby
-alias jgin="jruby -S gem install --no-rdoc --no-ri"
-alias jgist="jruby -S gem list"
-alias jss="jruby -S script/server"
-alias jr="jruby -S"
-alias jsc='jruby -S script/console'
-
-# rvm
-alias rvl="rvm list rubies"
-alias rvu="rvm use"
-alias rvs="rvm $1 --symlink textmate"
-alias rgin="rvm gem install --no-rdoc --no-ri"
-alias rvsys="rvm use system; rvm rbx --symlink textmate"
-alias rgi="sudo rake gems:install"
-alias sro="rake routes | grep "
-alias rvk="rvm list known"
-alias rvru="rvm list rubies"
-
-# watchr
-alias watch='watchr watchr/all.watchr'
+function cdgem {
+ cd `gem env gemdir`/gems
+ cd `ls | grep $1 | sort | tail -1` # -> cdgem
+} 									# cd into the gem dir
 
 # gzip
-alias unzip="tar xzvf" # unzips -x decompress flag -v verbose -f file 
-alias zip="tar czvf" # zips -c create -z gzip compression -v verbose -f file
-alias curlget="curl -O" # outputs to remote file name
-alias cconfig="./configure --prefix=/usr/local"
-alias mmake="make && make install"
-alias sset="env"
+alias unzip="tar -xzvf" 		# unzips -x decompress flag -v verbose -f file 
+alias zip="tar -czvf" 		# zips -c create -z gzip compression -v verbose -f file
+alias curlo="curl -O" 	# outputs to remote file name
 
-function acuc {
-  ./script/rstakeout "./script/cucumber" "app/**/*.rb" "features/**/*"
+alias bins="bundle install"
+
+alias reload='source ~/bin/dotfiles/bash/aliases'
+alias rele='source ~/bin/dotfiles/bash/env'
+alias ea='mate -w ~/bin/dotfiles/bash/aliases && reload'
+
+# run nsqlookupd first
+alias gp-nsqlookupd='nsqlookupd -http-address="localhost:4161"'
+alias gp-nsqd='nsqd --lookupd-tcp-address="127.0.0.1:4160"' # -tcp-address=127.0.0.1:4150 -http-address="0.0.0.0:4151"
+alias gp-mongo='mongod --dbpath /Users/david/projects/gowork/src/github.com/gp-twitter-votes/db'
+alias gp-nstail='nsq_tail --topic="votes" --lookupd-http-address=localhost:4161'
+alias gp-nsqadmin='nsqadmin --nsqd-http-address="0.0.0.0:4171"'
+# gp- nsqadmin gui open http://localhost:4171/
+
+alias sett='set | more'
+alias gset='set | grep'
+
+alias cdgo='cd ~/projects/gowork/src/github.com;l'
+
+alias sc3='st3 .'
+alias sc2='subl .'
+
+alias ss='alias | grep $1'
+# alias sas="cat ~/bin/dotfiles/bash/aliases | grep $1"
+
+alias eenv='mate ~/bin/dotfiles/bash/env'
+alias econf='mate ~/bin/dotfiles/bash/config'
+alias edhosts='mate /etc/hosts'
+
+#  https://docs.docker.com/engine/reference/commandline/ps/#formatting
+alias dr='docker'
+alias drp="docker ps --format 'table {{.Names}}\t{{.Image}}\t{{.Ports}}\t{{.Status}}\t{{.ID}}'"
+alias dra="docker ps -a --format 'table {{.Names}}\t{{.Image}}\t{{.Ports}}\t{{.Status}}\t{{.ID}}\t{{.Mounts}}'"
+alias dri='docker images'
+alias dm='docker-machine'
+
+function mantxt() {
+	man $1 | col -b > man_$1.txt
+}
+function fman(){
+	man $1 | grep $2 -C4
 }
 
-# RUBY
-# use readline, completion and require rubygems by default for irb
-alias irb='irb --simple-prompt -r irb/completion -rubygems'
+# terminal
+alias clr='clear'
+alias shosym='lh /usr/local/bin'
+alias cdsym='cd /usr/local/bin'
+alias fsym='shosym | grep $1'
+alias pax='ps -ax | grep'
+alias lem='lein midje --lazytest'
 
-# dump to fixtures, uses topfunky/ar_fixtures
-alias tofix='rake db:fixtures:dump RAILS_ENV=development'
+alias tz='tree --du -h -L 2'
 
-
- 
-# really awesome function, use: cdgem <gem name>, cd's into your gems directory
-# and opens gem that best matches the gem name provided
-function cdgem {
-  cd `gem env gemdir`/gems
-  cd `ls | grep $1 | sort | tail -1`
+function ff() { 
+find . -name $1 # -> ff 
+} # find in current directory
+function fff() { 
+sudo find / -name $1 # -> fff 
+}	# find all file
+function fif() {  # grep -nir $1 .
+	grep -nir $1 .
 }
-function gemdoc {
-  GEMDIR=`gem env gemdir`/doc
-  open $GEMDIR/`ls $GEMDIR | grep $1 | sort | tail -1`/rdoc/index.html
-}
-function mategem {
-  GEMDIR=`gem env gemdir`/gems
-  mate $GEMDIR/`ls $GEMDIR | grep $1 | sort | tail -1`
- }
 
-#  misc
 
-# mojombo http://gist.github.com/180587
-function pig {
-  ps wwwaux | egrep "( $1 | %CPU )" | grep -v grep
-}
+# Common -- Some are from Damian Conway
+#alias a='ls -A' 			# -A all except literal . ..
+alias la='ls -A -l -G'		# colored, all, long format
+alias l='ls -lahG'  			# -l long listing, -G color, 
+alias ll='ls -lhG'  		# -l long listing, human readable, no group info
+alias lw='ls -aw'			# list wide format
+alias lh='ls -al'			# list all long
+alias lt='ls -lt $1 | more'	# sort most recent first
+# function cdc() { 
+#     cd $1; l 
+# }
+# alias md='mkdir -p'
+alias s='cd ..; l '   		# up one dir and list
+alias d='cd ./$1; l '   	# down one dir and list
+
+alias ld='ls -Cd */'			# list only directories
+
+alias c='clear'
+alias cdd='cd -'  			# goto last dir cd'ed from
+alias cl='clear; l'
+alias cls='clear; ls'
+
+
+# history commands
+# ================
+# http://reviews.cnet.com/8301-13727_7-57561873-263/using-and-managing-the-terminal-history-in-os-x/
+# history writes to store when terminal closes
+# use 'history -r' to read from store while in another terminal, 'history -c' clears current, 'history -w' writes to store
+alias hnum2='!-2'						# runs 3rd last command
+alias h='history'
+alias fh='history | grep'		# find history
+alias hlast='!!'						# run last history command
+alias hprefix='!pico'				# to rerun last 'pico ...' command
+#alias shi='history | grep $1 --color=always'
+
+## vagrant
+# alias vg='vagrant'
+
+## nmap
+## http://www.cyberciti.biz/networking/nmap-command-examples-tutorials/
+alias nmguess='sudo nmap -v -O -Pn --osscan-guess --datadir=/usr/local/Cellar/nmap/6.47/share/nmap'
+alias nmscan='nmap -T5 192.168.1.0/24'
