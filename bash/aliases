@@ -2,8 +2,8 @@
 alias sas='cat ~/bin/dotfiles/bash/aliases | grep'
 alias eenv='vi ~/bin/dotfiles/bash/env'
 alias econf='vi ~/bin/dotfiles/bash/config'
-alias ea='vi -w ~/bin/dotfiles/bash/aliases && reload'
-alias reload='source ~/bin/dotfiles/bash/aliases'
+alias ea='vi ~/bin/dotfiles/bash/aliases && reload'
+alias reload='source ~/bin/dotfiles/bash/aliases && source ~/bin/dotfiles/bash/config'
 alias rele='source ~/bin/dotfiles/bash/env'
 
 alias edhosts='vi /etc/hosts'
@@ -12,8 +12,8 @@ alias edhosts='vi /etc/hosts'
 # ==========
 #alias a='ls -A' 			# -A all except literal . ..
 alias la='ls -A -l -G'		# colored, all, long format
-alias l='ls -lahG'  			# -l long listing, -G color,
-alias ll='ls -lhG'  		# -l long listing, human readable, no group info
+alias l='ls -lah'  			# -l long listing, -G color,
+alias ll='ls -lh'  		# -l long listing, human readable, no group info
 alias lw='ls -aw'			# list wide format
 alias lh='ls -al'			# list all long
 alias lt='ls -lt $1 | more'	# sort most recent first
@@ -24,8 +24,8 @@ alias ld='ls -Cd */'			# list only directories
 
 ## auto color grep
 # alias grep='grep --color=auto'
-alias egrep='egrep --color=auto'
-alias fgrep='fgrep --color=auto'
+# alias egrep='egrep --color=auto'
+# alias fgrep='fgrep --color=auto'
 
 alias topc='top -o cpu -n 40'
 alias topm='top -o vsize -n 40'

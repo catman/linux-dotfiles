@@ -1,4 +1,6 @@
+#PS1="\u@\h \! \w\$:"
+#PS1="\e[0;35m[\u@\h \! \W]\$ \e[m"
 
-# Update the command prompt to be <user>:<current_directory>(git_branch) >
-# Note that the git branch is given a special color
-PS1="\n\u:\w \[$EBLACK\]\$(vcprompt)\[$NO_COLOR\] \n→ "
+# https://askubuntu.com/questions/558280/changing-colour-of-text-and-background-of-terminal
+PS1="\e[38;5;43m[\u@\h \! \W]\$ \e[m"
+
